@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Menú {
+public class Menú implements Serializable{
 
     // Atributos de la clase Menú
 
@@ -19,6 +20,14 @@ public class Menú {
      */
     public Menú(Producto producto) {
         agregarProducto(producto);
+    }
+
+        /**
+     * Constructor de la clase `Menú`.
+     * Crea una instancia de Menú con un producto inicialmente.
+     */
+    public Menú() {
+
     }
 
     // Métodos de la clase Menú
@@ -47,7 +56,15 @@ public class Menú {
         return productos;
     }
 
+    @Override
+    public String toString() {
+        System.out.println("-----Menú Restaurante-----");
+        return String.format("-> %s", productos);
+    }
+
     public void setProductos(ArrayList<Producto> productos) {
         this.productos = productos;
     }
+
+
 }

@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Producto {
+public class Producto implements Serializable{
 
     // Atributos de la clase Producto
 
@@ -23,10 +24,10 @@ public class Producto {
     /**
      * Indica si el producto está disponible.
      */
-    private String disponible;
+    private boolean disponible;
 
     /**
-     * Lista de detalles relacionados con este producto.
+     * Detalles relacionados con este producto.
      */
     private List<Detalles> ordenes = new ArrayList<Detalles>();
 
@@ -48,17 +49,20 @@ public class Producto {
      * @param ordenes Lista de detalles relacionados con este producto.
      * @param menú Lista de menús a los que pertenece el producto.
      */
-    public Producto(String nombre, int precio, String categoria, String disponible, List<Detalles> ordenes,
-            List<Menú> menú) {
+    public Producto(String nombre, int precio, String categoria, boolean disponible) {
         this.nombre = nombre;
         this.precio = precio;
         this.categoria = categoria;
         this.disponible = disponible;
-        this.ordenes = ordenes;
-        this.menú = menú;
     }
 
     // Métodos de acceso (Getters y Setters)
+
+    @Override
+    public String toString() {
+        return  nombre + ", precio=" + precio + ", categoria=" + categoria + ", disponible="
+                + disponible + " \n";
+    }
 
     /**
      * Obtiene el nombre del producto.
@@ -112,7 +116,7 @@ public class Producto {
      * Obtiene la disponibilidad del producto.
      * @return La disponibilidad del producto.
      */
-    public String getDisponible() {
+    public boolean getDisponible() {
         return disponible;
     }
 
@@ -120,7 +124,7 @@ public class Producto {
      * Establece la disponibilidad del producto.
      * @param disponible La disponibilidad del producto.
      */
-    public void setDisponible(String disponible) {
+    public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
 

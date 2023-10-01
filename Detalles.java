@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * Esta clase es la encargada de detallar cada pedio que se realiza
+ */
 public class Detalles {
 
     // Atributos de la clase Detalles
@@ -35,10 +38,9 @@ public class Detalles {
      * @param descuento El descuento aplicado a la entidad (en bytes).
      * @param ordenes Lista de órdenes relacionadas con esta entidad.
      */
-    public Detalles(String cantidad, String estado, byte descuento, List<Orden> ordenes) {
+    public Detalles(String cantidad, String estado, List<Orden> ordenes) {
         this.cantidad = cantidad;
         this.estado = estado;
-        this.descuento = descuento;
         this.ordenes = ordenes;
     }
 
