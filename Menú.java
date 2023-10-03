@@ -66,5 +66,15 @@ public class Menú implements Serializable{
         this.productos = productos;
     }
 
+    public Producto getProducto(String nombreProducto) {
+        for (Producto producto : productos) {
+            if (producto.getNombre().equals(nombreProducto)) {
+                return producto; // Devuelve el producto si se encuentra por nombre
+            }
+        }
+        return null; // Si no se encuentra el producto, devuelve null
+    }
+    
+
 
 }

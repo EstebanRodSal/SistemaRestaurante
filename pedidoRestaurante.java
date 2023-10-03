@@ -1,14 +1,13 @@
-import java.util.List;
+import java.util.ArrayList;
 
-
-public class pedidoRestaurante extends Orden {
+public class PedidoRestaurante extends Orden {
 
     // Atributos de la clase pedidoRestaurante
 
     /**
      * El número de mesa donde se realizará el pedido.
      */
-    private byte numMesa;
+    private int numMesa;
 
     // Constructores
 
@@ -22,11 +21,11 @@ public class pedidoRestaurante extends Orden {
      * @param express Indica si la orden es express.
      * @param retirarLocal Indica si la orden se retirará en el local.
      * @param comerLocal Indica si la orden se consumirá en el local.
-     * @param cliente Lista de clientes asociados a la orden.
-     * @param numMesa El número de mesa donde se realizará el pedido.
+     * @param cliente Cliente asociao a la orden.
+     * @param numMesa El número de mesa asignado al cliente.
      */
-    public pedidoRestaurante(String comida, String fecha, String descripcion, String express, String retirarLocal,
-            String comerLocal, List<Cliente> cliente, byte numMesa) {
+    public PedidoRestaurante(ArrayList<Producto> comida, String fecha, String descripcion, boolean express, boolean retirarLocal,
+    boolean comerLocal, Cliente cliente, int numMesa) {
         super(comida, fecha, descripcion, express, retirarLocal, comerLocal, cliente);
         this.numMesa = numMesa;
     }
@@ -37,7 +36,7 @@ public class pedidoRestaurante extends Orden {
      * Obtiene el número de mesa donde se realizará el pedido.
      * @return El número de mesa donde se realizará el pedido.
      */
-    public byte getNumMesa() {
+    public int getNumMesa() {
         return numMesa;
     }
 
@@ -45,7 +44,7 @@ public class pedidoRestaurante extends Orden {
      * Establece el número de mesa donde se realizará el pedido.
      * @param numMesa El número de mesa donde se realizará el pedido.
      */
-    public void setNumMesa(byte numMesa) {
+    public void setNumMesa(int numMesa) {
         this.numMesa = numMesa;
     }
 }

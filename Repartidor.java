@@ -24,7 +24,7 @@ public class Repartidor {
     /**
      * Lista de pedidos express que el repartidor debe entregar.
      */
-    private List<pedidosExpres> pedidosExpres = new ArrayList<pedidosExpres>();
+    private List<PedidosExpres> pedidosExpres = new ArrayList<PedidosExpres>();
 
     // Constructores
 
@@ -37,7 +37,7 @@ public class Repartidor {
      * @param tipoVehiculo El tipo de vehículo que utiliza el repartidor.
      * @param pedidosExpres Lista de pedidos express que el repartidor debe entregar.
      */
-    public Repartidor(String nombre, String placa, String tipoVehiculo, List<pedidosExpres> pedidosExpres) {
+    public Repartidor(String nombre, String placa, String tipoVehiculo, List<PedidosExpres> pedidosExpres) {
         this.nombre = nombre;
         this.placa = placa;
         this.tipoVehiculo = tipoVehiculo;
@@ -98,7 +98,7 @@ public class Repartidor {
      * Obtiene la lista de pedidos express que el repartidor debe entregar.
      * @return Lista de pedidos express que el repartidor debe entregar.
      */
-    public List<pedidosExpres> getPedidosExpres() {
+    public List<PedidosExpres> getPedidosExpres() {
         return pedidosExpres;
     }
 
@@ -106,7 +106,7 @@ public class Repartidor {
      * Establece la lista de pedidos express que el repartidor debe entregar.
      * @param pedidosExpres Lista de pedidos express que el repartidor debe entregar.
      */
-    public void setPedidosExpres(List<pedidosExpres> pedidosExpres) {
+    public void setPedidosExpres(List<PedidosExpres> pedidosExpres) {
         this.pedidosExpres = pedidosExpres;
     }
 

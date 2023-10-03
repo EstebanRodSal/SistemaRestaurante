@@ -1,7 +1,6 @@
-import java.util.List;
+import java.util.ArrayList;
 
-
-public class retirarPedido extends Orden {
+public class AutoServicio extends Orden {
 
     // Atributos de la clase retirarPedido
 
@@ -23,11 +22,11 @@ public class retirarPedido extends Orden {
      * @param express Indica si la orden es express.
      * @param retirarLocal Indica si la orden se retirará en el local.
      * @param comerLocal Indica si la orden se consumirá en el local.
-     * @param cliente Lista de clientes asociados a la orden.
+     * @param cliente Cliente asociados a la orden.
      * @param horaRetiro La hora programada para el retiro del pedido.
      */
-    public retirarPedido(String comida, String fecha, String descripcion, String express, String retirarLocal,
-            String comerLocal, List<Cliente> cliente, String horaRetiro) {
+    public AutoServicio(ArrayList<Producto> comida, String fecha, String descripcion, boolean express, boolean retirarLocal,
+    boolean comerLocal, Cliente cliente, String horaRetiro) {
         super(comida, fecha, descripcion, express, retirarLocal, comerLocal, cliente);
         this.horaRetiro = horaRetiro;
     }

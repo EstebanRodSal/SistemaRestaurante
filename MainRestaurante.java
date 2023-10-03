@@ -3,6 +3,10 @@ import java.net.*;
 
 public class MainRestaurante {
 
+   
+        
+
+
     public static void main(String[] args) {
         // Creación del menú
         Producto empanada = new Producto("Empanada", 2500, "Comida Rápida", true);
@@ -11,7 +15,8 @@ public class MainRestaurante {
         Producto pastel = new Producto("Pastel", 2500, "Repostería", true);
         Producto café = new Producto("Café", 1500, "Bebidas Calientes", true);
         Producto téFrio = new Producto("Té Frío", 1000, "Bebidas Frías", true);
-
+        
+        // Agregacion de los productos al menú
         Menú menú = new Menú();
         menú.agregarProducto(empanada);
         menú.agregarProducto(sandwich);
@@ -19,7 +24,9 @@ public class MainRestaurante {
         menú.agregarProducto(pastel);
         menú.agregarProducto(café);
         menú.agregarProducto(téFrio);
+    
 
+        // Apertura del servidor
         try {
             ServerSocket serverSocket = new ServerSocket(12345); // Puerto para la comunicación
             System.out.println("Esperando a clientes...");
@@ -27,24 +34,31 @@ public class MainRestaurante {
             while (true) {
                 Socket socket = serverSocket.accept(); // Esperar a que un cliente se conecte
 
+                //Conexión con un cliente
                 ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
                 outputStream.writeObject(menú); // Envia el menú al cliente
                 System.out.println("Un cliente se ha conectado al sistema");
                 ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
-                // Recibe la elección del cliente
-                String elección = (String) inputStream.readObject();
-                // Gurada en la variable elección lo que el cliente eligió
-                System.out.println("Orden recibida del cliente: " + elección);
-                // Envía una confirmación al cliente de que se recibió su producto
-                outputStream.writeObject("Orden recibida con éxito: " + elección);
 
-                if (elección == "Empanada"){
-                    //Crear instancia de una nueva orden con la empanada
-                }else if(elección == "Sandwich"){
-                    //Crear instancia de una nueva orden con el sandwich    
-                }
-                    //Así con el resto
+
+
+                // Recibe la elección del cliente (Comida)
+                Orden elección = (Orden) inputStream.readObject();
+
+
+
+                
+                // Envía una confirmación al cliente de que se recibió su producto
+                System.out.println("Orden recibida del cliente: " + elección);
+                outputStream.writeObject("Orden recibida con éxito: " + elección);
+                System.out.println(elección.getFecha());
+
+                
+
+
+            
+                    
 
 
                 // Cierra la conexión con el cliente
@@ -53,5 +67,6 @@ public class MainRestaurante {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        
     }
 }

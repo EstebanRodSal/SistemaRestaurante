@@ -1,6 +1,6 @@
-import java.util.List;
+import java.util.ArrayList;
 
-public class pedidosExpres extends Orden {
+public class PedidosExpres extends Orden {
 
     // Atributos de la clase pedidosExpres
 
@@ -21,11 +21,11 @@ public class pedidosExpres extends Orden {
      * @param express Indica si la orden es express.
      * @param retirarLocal Indica si la orden se retirará en el local.
      * @param comerLocal Indica si la orden se consumirá en el local.
-     * @param cliente Lista de clientes asociados a la orden.
+     * @param cliente Cliente asociado a la orden.
      * @param dirección La dirección de entrega de la orden express.
      */
-    public pedidosExpres(String comida, String fecha, String descripcion, String express, String retirarLocal,
-            String comerLocal, List<Cliente> cliente, String dirección) {
+    public PedidosExpres(ArrayList<Producto> comida, String fecha, String descripcion, boolean express, boolean retirarLocal,
+    boolean comerLocal, Cliente cliente, String dirección) {
         super(comida, fecha, descripcion, express, retirarLocal, comerLocal, cliente);
         this.dirección = dirección;
     }

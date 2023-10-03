@@ -1,14 +1,15 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Orden {
+public abstract class Orden implements Serializable{
 
     // Atributos de la clase Orden
 
     /**
      * La comida solicitada en la orden.
      */
-    private String comida;
+    private ArrayList<Producto> comida;
 
     /**
      * La fecha en que se realizó la orden.
@@ -23,22 +24,27 @@ public class Orden {
     /**
      * Indica si la orden es express.
      */
-    private String express;
+    private boolean express;
 
     /**
      * Indica si la orden se retirará en el local.
      */
-    private String retirarLocal;
+    private boolean retirarLocal;
 
     /**
      * Indica si la orden se consumirá en el local.
      */
-    private String comerLocal;
+    private boolean comerLocal;
 
     /**
      * Lista de clientes asociados a la orden.
      */
-    private List<Cliente> cliente = new ArrayList<Cliente>();
+    private Cliente cliente;
+
+     /**
+     * id de la orden.
+     */
+    private int idComanda = 1;
 
     // Constructores
 
@@ -52,8 +58,8 @@ public class Orden {
      * @param comerLocal Indica si la orden se consumirá en el local.
      * @param cliente Lista de clientes asociados a la orden.
      */
-    public Orden(String comida, String fecha, String descripcion, String express, String retirarLocal,
-            String comerLocal, List<Cliente> cliente) {
+    public Orden(ArrayList<Producto> comida, String fecha, String descripcion, boolean express, boolean retirarLocal,
+            boolean comerLocal, Cliente cliente) {
         this.comida = comida;
         this.fecha = fecha;
         this.descripcion = descripcion;
@@ -69,15 +75,27 @@ public class Orden {
      * Obtiene la comida solicitada en la orden.
      * @return La comida solicitada en la orden.
      */
-    public String getComida() {
+    public ArrayList<Producto> getComida() {
         return comida;
     }
+
+
+
+    public int getIdComanda() {
+        return idComanda;
+    }
+
+    public void setIdComanda(int idComanda) {
+        this.idComanda = idComanda;
+    }
+
+
 
     /**
      * Establece la comida solicitada en la orden.
      * @param comida La comida solicitada en la orden.
      */
-    public void setComida(String comida) {
+    public void setComida(ArrayList<Producto> comida) {
         this.comida = comida;
     }
 
@@ -117,7 +135,7 @@ public class Orden {
      * Indica si la orden es express.
      * @return `true` si la orden es express, `false` en caso contrario.
      */
-    public String getExpress() {
+    public boolean getExpress() {
         return express;
     }
 
@@ -125,7 +143,7 @@ public class Orden {
      * Establece si la orden es express.
      * @param express Indica si la orden es express.
      */
-    public void setExpress(String express) {
+    public void setExpress(boolean express) {
         this.express = express;
     }
 
@@ -133,7 +151,7 @@ public class Orden {
      * Indica si la orden se retirará en el local.
      * @return `true` si la orden se retirará en el local, `false` en caso contrario.
      */
-    public String getRetirarLocal() {
+    public boolean getRetirarLocal() {
         return retirarLocal;
     }
 
@@ -141,7 +159,7 @@ public class Orden {
      * Establece si la orden se retirará en el local.
      * @param retirarLocal Indica si la orden se retirará en el local.
      */
-    public void setRetirarLocal(String retirarLocal) {
+    public void setRetirarLocal(boolean retirarLocal) {
         this.retirarLocal = retirarLocal;
     }
 
@@ -149,33 +167,26 @@ public class Orden {
      * Indica si la orden se consumirá en el local.
      * @return `true` si la orden se consumirá en el local, `false` en caso contrario.
      */
-    public String getComerLocal() {
+    public boolean getComerLocal() {
         return comerLocal;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     /**
      * Establece si la orden se consumirá en el local.
      * @param comerLocal Indica si la orden se consumirá en el local.
      */
-    public void setComerLocal(String comerLocal) {
+    public void setComerLocal(boolean comerLocal) {
         this.comerLocal = comerLocal;
     }
 
-    /**
-     * Obtiene la lista de clientes asociados a la orden.
-     * @return Lista de clientes asociados a la orden.
-     */
-    public List<Cliente> getCliente() {
-        return cliente;
-    }
-
-    /**
-     * Establece la lista de clientes asociados a la orden.
-     * @param cliente Lista de clientes asociados a la orden.
-     */
-    public void setCliente(List<Cliente> cliente) {
-        this.cliente = cliente;
-    }
 
     // Métodos específicos de la clase Orden
 

@@ -1,29 +1,25 @@
-/**
- * La clase Cliente representa a un cliente que realiza pedidos en un sistema de pedidos en línea.
- */
-public class Cliente {
+import java.io.Serializable;
+
+public class Cliente implements Serializable{
     // Atributos privados de la clase Cliente
     private String nombre;       // Nombre del cliente
-    private String numero;       // Número de cliente
+    private int numero;       // Número de cliente
     private String direccion;    // Dirección de entrega
     private String metodoDePago; // Método de pago preferido
-    private String retirarLocal; // Preferencia de retiro local
 
     /**
      * Constructor de la clase Cliente.
-     *
      * @param nombre       Nombre del cliente.
      * @param numero       Número de cliente.
      * @param direccion    Dirección de entrega.
      * @param metodoDePago Método de pago preferido.
      * @param retirarLocal Preferencia de retiro local.
      */
-    public Cliente(String nombre, String numero, String direccion, String metodoDePago, String retirarLocal) {
+    public Cliente(String nombre, int numero, String direccion, String metodoDePago) {
         this.nombre = nombre;
         this.numero = numero;
         this.direccion = direccion;
         this.metodoDePago = metodoDePago;
-        this.retirarLocal = retirarLocal;
     }
 
     /**
@@ -49,7 +45,7 @@ public class Cliente {
      *
      * @return El número de cliente.
      */
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
@@ -58,7 +54,7 @@ public class Cliente {
      *
      * @param numero El nuevo número de cliente.
      */
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 
@@ -96,24 +92,6 @@ public class Cliente {
      */
     public void setMetodoDePago(String metodoDePago) {
         this.metodoDePago = metodoDePago;
-    }
-
-    /**
-     * Método para obtener la preferencia de retiro local del cliente.
-     *
-     * @return La preferencia de retiro local del cliente.
-     */
-    public String getRetirarLocal() {
-        return retirarLocal;
-    }
-
-    /**
-     * Método para establecer la preferencia de retiro local del cliente.
-     *
-     * @param retirarLocal La nueva preferencia de retiro local del cliente.
-     */
-    public void setRetirarLocal(String retirarLocal) {
-        this.retirarLocal = retirarLocal;
     }
 
     /**
