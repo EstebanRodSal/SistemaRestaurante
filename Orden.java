@@ -41,10 +41,13 @@ public abstract class Orden implements Serializable{
      */
     private Cliente cliente;
 
-     /**
-     * id de la orden.
-     */
-    private int idComanda = 1;
+
+    private boolean entregado = false;
+
+    private byte descuento;
+
+
+    private Detalles detalles;
 
     // Constructores
 
@@ -81,13 +84,7 @@ public abstract class Orden implements Serializable{
 
 
 
-    public int getIdComanda() {
-        return idComanda;
-    }
 
-    public void setIdComanda(int idComanda) {
-        this.idComanda = idComanda;
-    }
 
 
 
@@ -197,4 +194,30 @@ public abstract class Orden implements Serializable{
     public void GenerarReporte() {
         // Implementa la lógica de generación de reporte aquí.
     }
+
+    public Detalles getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(Detalles detalles) {
+        this.detalles = detalles;
+    }
+
+    public boolean isEntregado() {
+        return entregado;
+    }
+
+    public void setEntregado(boolean entregado) {
+        this.entregado = entregado;
+    }
+
+    public byte getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(byte descuento) {
+        this.descuento = descuento;
+    }
+
+    
 }

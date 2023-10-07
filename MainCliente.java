@@ -155,7 +155,7 @@ public class MainCliente {
 
         try {
             // Establecer conexión con el servidor
-            Socket socket = new Socket("localhost", 12345);
+            Socket socket = new Socket("LocalHost", 12345);
             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
             Menú menúRecibido = (Menú) inputStream.readObject(); // Recibir el menú del servidor
 

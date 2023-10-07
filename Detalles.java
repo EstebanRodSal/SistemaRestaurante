@@ -9,15 +9,12 @@ public class Detalles {
 
     // Atributos de la clase Detalles
 
-    /**
-     * La cantidad de la entidad.
-     */
-    private String cantidad;
+
 
     /**
      * El estado de la entidad.
      */
-    private String estado;
+    private Boolean entregado;
 
     /**
      * El descuento aplicado a la entidad (en bytes).
@@ -38,44 +35,29 @@ public class Detalles {
      * @param descuento El descuento aplicado a la entidad (en bytes).
      * @param ordenes Lista de órdenes relacionadas con esta entidad.
      */
-    public Detalles(String cantidad, String estado, List<Orden> ordenes) {
-        this.cantidad = cantidad;
-        this.estado = estado;
+    public Detalles(Boolean estado, List<Orden> ordenes) {
+        this.entregado = estado;
         this.ordenes = ordenes;
     }
 
     // Métodos de acceso (Getters y Setters)
 
-    /**
-     * Obtiene la cantidad de la entidad.
-     * @return La cantidad de la entidad.
-     */
-    public String getCantidad() {
-        return cantidad;
-    }
-
-    /**
-     * Establece la cantidad de la entidad.
-     * @param cantidad La cantidad de la entidad.
-     */
-    public void setCantidad(String cantidad) {
-        this.cantidad = cantidad;
-    }
+    
 
     /**
      * Obtiene el estado de la entidad.
      * @return El estado de la entidad.
      */
-    public String getEstado() {
-        return estado;
+    public Boolean getEstado() {
+        return entregado;
     }
 
     /**
      * Establece el estado de la entidad.
      * @param estado El estado de la entidad.
      */
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEntregado(Boolean estado) {
+        this.entregado = estado;
     }
 
     /**
@@ -108,5 +90,9 @@ public class Detalles {
      */
     public void setOrdenes(List<Orden> ordenes) {
         this.ordenes = ordenes;
+    }
+
+    public void Entregar(){
+        this.entregado = true;
     }
 }

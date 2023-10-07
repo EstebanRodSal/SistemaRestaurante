@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.text.BreakIterator;
 
 public class MainRestaurante {
 
@@ -37,29 +38,40 @@ public class MainRestaurante {
                 while (true){
                 
 
+                    ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
-
-                ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
-
-                System.out.println("ESPERANDO ORDEN");
-                // Recibe la elección del cliente (Comida)
-                Orden elección = (Orden) inputStream.readObject();
+                    System.out.println("ESPERANDO ORDEN");
+                    // Recibe la elección del cliente (Comida)
+                    Orden elección = (Orden) inputStream.readObject();
 
 
 
-                
-                // Envía una confirmación al cliente de que se recibió su producto
-                System.out.println("Orden recibida del cliente: " + elección);
-                outputStream.writeObject("Orden recibida con éxito: " + elección);
-                System.out.println(elección.getCliente().getNombre());
+                    
+                    // Envía una confirmación al cliente de que se recibió su producto
+                    System.out.println("Orden recibida del cliente: " + elección);
+                    outputStream.writeObject("Orden recibida con éxito: " + elección);
+                    System.out.println(elección.getCliente().getNombre());
+
+
+                    // Enviar la orden recibida por sockets a MainExpress
+                    try {
+                        // Abre una conexión al servidor de MainExpress
+                        Socket expressSocket = new Socket("localhost", 54321);
+
+                        // Envia la orden a MainExpress
+                        ObjectOutputStream expressOutputStream = new ObjectOutputStream(expressSocket.getOutputStream());
+                        expressOutputStream.writeObject(elección);
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 }
                 
 
                 
 
-
-            
-                    
 
 
                 // Cierra la conexión con el cliente
