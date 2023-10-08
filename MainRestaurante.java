@@ -10,23 +10,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class MainRestaurante {
 
+    // Código de escape ANSI para color Rojo
+    final static String red = "\u001B[31m";
+    final static String reset = "\u001B[0m";
+    // Código de escape ANSI para color Azul
+    final static String blue = "\u001B[34m";
+    // Código de escape ANSI para color Verde Agua
+    final static String cyan = "\u001B[36m";
+
+
+    /**
+     * Metodo encargado de limpiar la terimal
+     */
     public static void limpiarTerminal() {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (final Exception e) {
             // Manejo de excepciones
-            System.out.println("Error al limpiar la terminal.");
+            System.out.println(red + "Error al limpiar la terminal." + reset);
         }
     }
 
+    /**
+     * Metodo encargado de generar el reporte de ventas
+     */
     public static void GenerarReporte() {
         limpiarTerminal();
         // Verificar si es una orden para servicio a domicilio
         // Reporte: Total de ventas diarias
-        System.out.println("Reporte de Total de Ventas Diarias:");
+        System.out.println(cyan + "Reporte de Total de Ventas Diarias:" + reset);
         List<Orden> ventasDiarias = new ArrayList<>(registroPedidosTotal);
         Collections.sort(ventasDiarias, new Comparator<Orden>() {
             @Override
@@ -45,24 +61,14 @@ public class MainRestaurante {
                 detallesVenta.append(producto.getNombre()).append(", ");
             }
             detallesVenta.delete(detallesVenta.length() - 2, detallesVenta.length()); // Eliminar la última coma y espacio
-            System.out.println("Orden: " + detallesVenta.toString() + " - Cantidad de Opciones Vendidas: " + comidaOrdenada.size());
+            System.out.println(blue + "Orden: " + detallesVenta.toString() + " - Cantidad de Opciones Vendidas: " + comidaOrdenada.size() + reset);
         }
 
         // Reporte: Reporte de servicio a domicilio
-        System.out.println("\nReporte de Servicio a Domicilio:");
-        List<Orden> ordenesExpress = new ArrayList<>(registroPedidosExpress);
-        Map<String, Integer> entregasPorEntidad = new HashMap<>();
+        System.out.println(cyan + "\nReporte de Servicio a Domicilio:" + reset);
+        
+        //GENERAR AQUÍ REPORTE DE DE VETAS A DOMICILIO
 
-        for (Orden orden : ordenesExpress) {
-            String entidadServicio = orden.getCliente().getNombre();
-            entregasPorEntidad.put(entidadServicio, entregasPorEntidad.getOrDefault(entidadServicio, 0) + 1);
-        }
-
-        entregasPorEntidad.entrySet().stream()
-                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                .forEach(entry -> {
-                    System.out.println("Entidad de Servicio: " + entry.getKey() + " - Cantidad de Entregas: " + entry.getValue());
-                });
         
     }
 
@@ -90,7 +96,7 @@ public class MainRestaurante {
         Producto tortaChilena = new Producto("Torta Chilena", 3500, "Repostería", true);
         Producto pastel = new Producto("Pastel", 2500, "Repostería", true);
         Producto café = new Producto("Cafe", 1500, "Bebidas Calientes", true);
-        Producto téFrio = new Producto("Te Frío", 1000, "Bebidas Frías", true);
+        Producto téFrio = new Producto("Te frio", 1000, "Bebidas Frías", true);
 
         
         // Agregacion de los productos al menú
@@ -113,21 +119,21 @@ public class MainRestaurante {
         // Apertura del servidor
         try {
             ServerSocket serverSocket = new ServerSocket(12345); // Puerto para la comunicación
-            System.out.println("Esperando a clientes...");
+            System.out.println(cyan + "Esperando a clientes..."+ reset);
 
             while (true) {
                 Socket socket = serverSocket.accept(); // Esperar a que un cliente se conecte
                 //Conexión con un cliente
                 ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
                 outputStream.writeObject(menú); // Envia el menú al cliente
-                System.out.println("Un cliente se ha conectado al sistema");
+                System.out.println(cyan + "Un cliente se ha conectado al sistema" + reset);
 
                 while (true){
                 
 
                     ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
-                    System.out.println("ESPERANDO ORDEN");
+                    System.out.println(blue + "ESPERANDO ORDEN"+ reset);
                     // Recibe la elección del cliente (Comida)
                     Orden elección = (Orden) inputStream.readObject();
 
@@ -141,7 +147,7 @@ public class MainRestaurante {
                         System.out.println(elección.getCliente().getNombre());
 
 
-                        System.out.println("Asocie la orden recibida a algún empleado");
+                        System.out.println(cyan + "Asocie la orden recibida a algún empleado"+ reset);
                         System.out.println("Digite 1 para Juan Daniel");
                         System.out.println("Digite 2 para Marta");
 
@@ -181,7 +187,7 @@ public class MainRestaurante {
                                 limpiarTerminal();
                                 todosCompletados = true;  
                                 
-                                System.out.println("Productos asociados al empleado:");
+                                System.out.println(cyan + "Productos asociados al empleado:" + reset);
                                 for (int i = 0; i < empleado1.getOrdenes().size(); i++) {
                                     Producto producto = empleado1.getOrdenes().get(i);
                                     System.out.println(i + 1 + ". " + producto.getNombre() + " - Completado: " + producto.getCompletado());
@@ -196,7 +202,7 @@ public class MainRestaurante {
                                 }
 
                                 // Solicita al usuario que marque los productos como completados
-                                System.out.println("Ingrese el número del producto que desea marcar como completado (o 0 para continuar):");
+                                System.out.println(cyan  + "Ingrese el número del producto que desea marcar como completado (o 0 para continuar):" + reset);
 
                                 int selectedProduct = scanner.nextInt();
 
@@ -284,7 +290,7 @@ public class MainRestaurante {
 
                 
 
-                GenerarReporte();
+                
 
                 // Cierra la conexión con el cliente
                 //socket.close();

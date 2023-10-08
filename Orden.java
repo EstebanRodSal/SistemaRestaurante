@@ -79,7 +79,7 @@ public abstract class Orden implements Serializable{
      * @return La comida solicitada en la orden.
      */
     public ArrayList<Producto> getComida() {
-        return comida;
+        return comida;                              //Cuando se recive el pedido hay algo que se está recibiendo como null(Sera que en null debe de ir la lista de te frio)
     }
 
 

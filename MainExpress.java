@@ -4,10 +4,12 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Scanner;;
+import java.util.Scanner;
+
+
 
 public class MainExpress {
-
+    public static ArrayList<Repartidor> listaRepartidores = new ArrayList<Repartidor>();
 
     public static void main(String[] args) {
 

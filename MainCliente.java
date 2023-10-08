@@ -239,11 +239,11 @@ public class MainCliente {
                     } else if (eleccion.equalsIgnoreCase("Pastel")) {
                         ordenFinal.add(menúRecibido.getProducto("Pastel"));
                         System.out.println(ANSI_GREEN + "Producto Registrado" + ANSI_RESET);
-                    } else if (eleccion.equalsIgnoreCase("Café")) {
-                        ordenFinal.add(menúRecibido.getProducto("Café"));
+                    } else if (eleccion.equalsIgnoreCase("Cafe")) {
+                        ordenFinal.add(menúRecibido.getProducto("Cafe"));
                         System.out.println(ANSI_GREEN + "Producto Registrado" + ANSI_RESET);
-                    } else if (eleccion.equalsIgnoreCase("Te frío")) {
-                        ordenFinal.add(menúRecibido.getProducto("Te frío"));
+                    } else if (eleccion.equalsIgnoreCase("Te frio")) {
+                        ordenFinal.add(menúRecibido.getProducto("Te frio"));
                         System.out.println(ANSI_GREEN + "Producto Registrado" + ANSI_RESET);
                     } else {
                         System.out.println();
