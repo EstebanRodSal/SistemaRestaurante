@@ -47,7 +47,7 @@ public abstract class Orden implements Serializable{
     private byte descuento;
 
 
-    private Detalles detalles;
+
 
     // Constructores
 
@@ -195,13 +195,7 @@ public abstract class Orden implements Serializable{
         // Implementa la lógica de generación de reporte aquí.
     }
 
-    public Detalles getDetalles() {
-        return detalles;
-    }
 
-    public void setDetalles(Detalles detalles) {
-        this.detalles = detalles;
-    }
 
     public boolean isEntregado() {
         return entregado;

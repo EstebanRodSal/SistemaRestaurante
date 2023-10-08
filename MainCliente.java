@@ -1,5 +1,8 @@
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,7 +42,7 @@ public class MainCliente {
         byte userInput = scanner.nextByte();
         scanner.nextLine();  // Consumir el carácter de nueva línea
 
-        Orden pedido = null; // Inicializamos a null
+        Orden pedido = null; 
 
         // Crear el pedido basado en la elección del usuario
         if (userInput == 1) {
@@ -187,12 +190,37 @@ public class MainCliente {
                     // Recibir confirmación del servidor
                     String confirmacion = (String) inputStream.readObject();
                     System.out.println("Servidor: " + confirmacion);
+                    try {
+                        ServerSocket serverSocket = new ServerSocket(123); // Puerto para la comunicación con MainRestaurante
+                        System.out.println("Esperando orden");
+                        
+                        while (true) {
+                            System.out.println("----");
+                            Socket socket2 = serverSocket.accept(); // Esperar a que el restaurante envíe una orden
+                            System.out.println("----");
+                            ObjectInputStream inputStream2 = new ObjectInputStream(socket2.getInputStream());
 
+                            // Recibe la orden desde el restaurante
+                            Orden orden = (Orden) inputStream2.readObject();
+
+                            
+                            System.out.println("¡Su orden de " + orden.getComida() + " ha sido entregada!");
+                            System.out.println("-------------------------------------------");
+                            System.out.println("¡Gracias por utilizar nuestro sistema de pedidos! ¡Hasta pronto!");
+                            //Se cierra el socket
+                            socket.close();
+                            break;
+                        }
+                    } catch (IOException e) {
+                        // Maneja la excepción de entrada/salida aquí
+                        e.printStackTrace(); // O puedes manejarla de otra manera según tus necesidades
+                    }
                     System.out.println("¿Deseas realizar otro pedido? (Sí/No)");
                     String respuesta = scanner.nextLine();
                     if (respuesta.equalsIgnoreCase("No")) {
                         continuarPedido = false;
                     } else {
+                        
                         limpiarTerminal(); // Limpia la terminal
                         ordenFinal.clear(); // Limpiar la lista para el siguiente pedido
                         cliente = obtenerDatosCliente();  // Solicitar datos del nuevo cliente
@@ -223,10 +251,7 @@ public class MainCliente {
                     }
                 }
             }
-            System.out.println();
-            System.out.println("¡Gracias por utilizar nuestro sistema de pedidos! ¡Hasta pronto!");
-            //Se cierra el socket
-            socket.close();
+
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

@@ -26,15 +26,14 @@ public class Producto implements Serializable{
      */
     private boolean disponible;
 
-    /**
-     * Detalles relacionados con este producto.
-     */
-    private List<Detalles> ordenes = new ArrayList<Detalles>();
+
 
     /**
      * Lista de menús a los que pertenece el producto.
      */
     private List<Menú> menú = new ArrayList<Menú>();
+
+    private Boolean completado = false;
 
     // Constructores
 
@@ -128,21 +127,7 @@ public class Producto implements Serializable{
         this.disponible = disponible;
     }
 
-    /**
-     * Obtiene la lista de detalles relacionados con este producto.
-     * @return Lista de detalles relacionados con este producto.
-     */
-    public List<Detalles> getOrdenes() {
-        return ordenes;
-    }
-
-    /**
-     * Establece la lista de detalles relacionados con este producto.
-     * @param ordenes Lista de detalles relacionados con este producto.
-     */
-    public void setOrdenes(List<Detalles> ordenes) {
-        this.ordenes = ordenes;
-    }
+    
 
     /**
      * Obtiene la lista de menús a los que pertenece el producto.
@@ -158,5 +143,13 @@ public class Producto implements Serializable{
      */
     public void setMenú(List<Menú> menú) {
         this.menú = menú;
+    }
+
+    public Boolean getCompletado() {
+        return completado;
+    }
+
+    public void setCompletado(Boolean completado) {
+        this.completado = completado;
     }
 }

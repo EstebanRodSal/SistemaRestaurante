@@ -26,6 +26,8 @@ public class Repartidor {
      */
     private List<PedidosExpres> pedidosExpres = new ArrayList<PedidosExpres>();
 
+    private int entregas;
+
     // Constructores
 
     /**
@@ -37,11 +39,12 @@ public class Repartidor {
      * @param tipoVehiculo El tipo de vehículo que utiliza el repartidor.
      * @param pedidosExpres Lista de pedidos express que el repartidor debe entregar.
      */
-    public Repartidor(String nombre, String placa, String tipoVehiculo, List<PedidosExpres> pedidosExpres) {
+    public Repartidor(String nombre, String placa, String tipoVehiculo, List<PedidosExpres> pedidosExpres, int entregas) {
         this.nombre = nombre;
         this.placa = placa;
         this.tipoVehiculo = tipoVehiculo;
         this.pedidosExpres = pedidosExpres;
+        this.entregas = entregas;
     }
 
     // Métodos de acceso (Getters y Setters)
@@ -117,14 +120,43 @@ public class Repartidor {
      * Debes implementar la lógica específica para la entrega de pedidos aquí.
      */
     public void entregarPedidos() {
-        // Implementa la lógica de entrega de pedidos aquí.
+        System.out.println("El repartidor " + this.nombre + " llevará a cabo la entrega");
+        this.entregas += 1;
     }
 
-    /**
-     * Método que permite al repartidor obtener datos del cliente relacionados con los pedidos.
-     * Debes implementar la lógica específica para obtener los datos del cliente aquí.
-     */
-    public void obtenerDatosCliente() {
-        // Implementa la lógica de obtención de datos del cliente aquí.
+    public int getEntregas() {
+        return entregas;
+    }
+
+    public void setEntregas(int entregas) {
+        this.entregas = entregas;
+    }
+
+    public void cantidadDeEntregasPorRepartidor(ArrayList<Repartidor> repartidores) {
+        System.out.println("Lista de entregas por cada repartidor \n");
+        ArrayList<Repartidor> listaAux = new ArrayList<>();
+
+        while (!repartidores.isEmpty()) {
+            int mayorEntregas = -1;
+            Repartidor repartidorAux = null;
+
+            for (Repartidor repartidor : repartidores) {
+                int entregasActuales = repartidor.getEntregas();
+                if (entregasActuales > mayorEntregas) {
+                    mayorEntregas = entregasActuales;
+                    repartidorAux = repartidor;
+                }
+            }
+
+            if (repartidorAux != null) {
+                listaAux.add(repartidorAux);
+                repartidores.remove(repartidorAux);
+            }
+        }
+
+        // Imprimir los nombres de los repartidores en listaAux
+        for (Repartidor repartidor : listaAux) {
+            System.out.println(repartidor.getNombre()+" - Entregas: "+repartidor.getEntregas());
+        }
     }
 }

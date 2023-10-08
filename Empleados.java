@@ -16,15 +16,11 @@ public class Empleados {
      */
     private String categoria;
 
-    /**
-     * Lista de detalles relacionados con este empleado.
-     */
-    private List<Detalles> detalles = new ArrayList<Detalles>();
 
     /**
      * Lista de órdenes relacionadas con este empleado.
      */
-    private List<Orden> ordenes = new ArrayList<Orden>();
+    private List<Producto> producto = new ArrayList<Producto>();
 
     // Constructores
 
@@ -35,11 +31,9 @@ public class Empleados {
      * @param detalles Lista de detalles relacionados con este empleado.
      * @param ordenes Lista de órdenes relacionadas con este empleado.
      */
-    public Empleados(String nombre, String categoria, List<Detalles> detalles, List<Orden> ordenes) {
+    public Empleados(String nombre, String categoria) {
         this.nombre = nombre;
         this.categoria = categoria;
-        this.detalles = detalles;
-        this.ordenes = ordenes;
     }
 
     // Métodos de acceso (Getters y Setters)
@@ -76,36 +70,22 @@ public class Empleados {
         this.categoria = categoria;
     }
 
-    /**
-     * Obtiene la lista de detalles relacionados con este empleado.
-     * @return Lista de detalles relacionados con este empleado.
-     */
-    public List<Detalles> getDetalles() {
-        return detalles;
-    }
-
-    /**
-     * Establece la lista de detalles relacionados con este empleado.
-     * @param detalles Lista de detalles relacionados con este empleado.
-     */
-    public void setDetalles(List<Detalles> detalles) {
-        this.detalles = detalles;
-    }
+    
 
     /**
      * Obtiene la lista de órdenes relacionadas con este empleado.
      * @return Lista de órdenes relacionadas con este empleado.
      */
-    public List<Orden> getOrdenes() {
-        return ordenes;
+    public List<Producto> getOrdenes() {
+        return producto;
     }
 
     /**
      * Establece la lista de órdenes relacionadas con este empleado.
      * @param ordenes Lista de órdenes relacionadas con este empleado.
      */
-    public void setOrdenes(List<Orden> ordenes) {
-        this.ordenes = ordenes;
+    public void addOrdenes(Producto orden) {
+        this.producto.add(orden);
     }
 
     // Métodos específicos de la clase Empleados
