@@ -175,51 +175,75 @@ public class MainRestaurante {
 
 
 
+                        if (userInput == 1){
+                            boolean todosCompletados = false;
+                            while (!todosCompletados) {
+                                limpiarTerminal();
+                                todosCompletados = true;  
+                                
+                                System.out.println("Productos asociados al empleado:");
+                                for (int i = 0; i < empleado1.getOrdenes().size(); i++) {
+                                    Producto producto = empleado1.getOrdenes().get(i);
+                                    System.out.println(i + 1 + ". " + producto.getNombre() + " - Completado: " + producto.getCompletado());
+                                    if (!producto.getCompletado()) {
+                                        todosCompletados = false;  // Si encuentra un producto no completado, establece todosCompletados en false
+                                    }
+                                }
 
-                        boolean todosCompletados = false;
-                        while (!todosCompletados) {
-                            limpiarTerminal();
-                            todosCompletados = true;  // Establece inicialmente todosCompletados en true
-                            
-                            System.out.println("Productos asociados al empleado:");
-                            for (int i = 0; i < empleado1.getOrdenes().size(); i++) {
-                                Producto producto = empleado1.getOrdenes().get(i);
-                                System.out.println(i + 1 + ". " + producto.getNombre() + " - Completado: " + producto.getCompletado());
-                                if (!producto.getCompletado()) {
-                                    todosCompletados = false;  // Si encuentra un producto no completado, establece todosCompletados en false
+                                if (todosCompletados) {
+                                    System.out.println("¡Todos los productos asociados al empleado " + empleado1.getNombre() + " han sido marcados como completados!");
+                                    break;  // Sale del bucle si todos los productos están completados
+                                }
+
+                                // Solicita al usuario que marque los productos como completados
+                                System.out.println("Ingrese el número del producto que desea marcar como completado (o 0 para continuar):");
+
+                                int selectedProduct = scanner.nextInt();
+
+                                if (selectedProduct > 0 && selectedProduct <= empleado1.getOrdenes().size()) {
+                                    Producto productoSeleccionado = empleado1.getOrdenes().get(selectedProduct - 1);
+                                    productoSeleccionado.setCompletado(true);
+                                    System.out.println("El producto " + productoSeleccionado.getNombre() + " ha sido marcado como completado.");
                                 }
                             }
+                        }else{
+                            boolean todosCompletados = false;
+                            while (!todosCompletados) {
+                                limpiarTerminal();
+                                todosCompletados = true;  
+                                
+                                System.out.println("Productos asociados al empleado:");
+                                for (int i = 0; i < empleado2.getOrdenes().size(); i++) {
+                                    Producto producto = empleado2.getOrdenes().get(i);
+                                    System.out.println(i + 1 + ". " + producto.getNombre() + " - Completado: " + producto.getCompletado());
+                                    if (!producto.getCompletado()) {
+                                        todosCompletados = false;  // Si encuentra un producto no completado, establece todosCompletados en false
+                                    }
+                                }
 
-                            if (todosCompletados) {
-                                System.out.println("¡Todos los productos asociados al empleado " + empleado1.getNombre() + " han sido marcados como completados!");
-                                break;  // Sale del bucle si todos los productos están completados
+                                if (todosCompletados) {
+                                    System.out.println("¡Todos los productos asociados al empleado " + empleado2.getNombre() + " han sido marcados como completados!");
+                                    break;  // Sale del bucle si todos los productos están completados
+                                }
+
+                                // Solicita al usuario que marque los productos como completados
+                                System.out.println("Ingrese el número del producto que desea marcar como completado (o 0 para continuar):");
+
+                                int selectedProduct = scanner.nextInt();
+
+                                if (selectedProduct > 0 && selectedProduct <= empleado2.getOrdenes().size()) {
+                                    Producto productoSeleccionado = empleado2.getOrdenes().get(selectedProduct - 1);
+                                    productoSeleccionado.setCompletado(true);
+                                    System.out.println("El producto " + productoSeleccionado.getNombre() + " ha sido marcado como completado.");
+                                }
                             }
-
-                            // Solicita al usuario que marque los productos como completados
-                            System.out.println("Ingrese el número del producto que desea marcar como completado (o 0 para continuar):");
-
-                            int selectedProduct = scanner.nextInt();
-
-                            if (selectedProduct > 0 && selectedProduct <= empleado1.getOrdenes().size()) {
-                                Producto productoSeleccionado = empleado1.getOrdenes().get(selectedProduct - 1);
-                                productoSeleccionado.setCompletado(true);
-                                System.out.println("El producto " + productoSeleccionado.getNombre() + " ha sido marcado como completado.");
-                            }
+                        
                         }
+                        
 
                         
 
                        
-                       
-
-
-
-                    //--------Tener la posibilidad de ver un pedido, darle seguimiento y ver que empleado está haciendo eso------------------
-
-
-                    //---------Generar reporte
-
-
 
                     if (elección.getExpress()){//Si la orden es express se manda a mainExpress
                         // Enviar la orden recibida por sockets a MainExpress
