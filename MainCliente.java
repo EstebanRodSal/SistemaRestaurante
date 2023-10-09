@@ -141,11 +141,8 @@ public class MainCliente {
      * @param args Argumentos de la línea de comandos (no se utilizan en este contexto).
      */
     public static void main(String[] args) {
-        // Códigos de escape ANSI para color verde
-        final String ANSI_GREEN = "\u001B[32m";// Códigos de escape ANSI para color verde
-        // Códigos de escape ANSI para color rojo
+        final String ANSI_GREEN = "\u001B[32m";
         final String ANSI_RED = "\u001B[31m";
-        // Códigos de escape ANSI para color Amarillo
         final String ANSI_YELLOW = "\u001B[33m";
         final String ANSI_RESET = "\u001B[0m";
 

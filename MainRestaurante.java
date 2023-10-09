@@ -11,12 +11,9 @@ import java.util.Scanner;
 
 public class MainRestaurante {
 
-    // Código de escape ANSI para color Rojo
     final static String red = "\u001B[31m";
     final static String reset = "\u001B[0m";
-    // Código de escape ANSI para color Azul
     final static String blue = "\u001B[34m";
-    // Código de escape ANSI para color Verde Agua
     final static String cyan = "\u001B[36m";
     private static int totalVentas;
 
@@ -92,7 +89,7 @@ public class MainRestaurante {
         Producto tortaChilena = new Producto("Torta Chilena", 3500, "Repostería", true);
         Producto pastel = new Producto("Pastel", 2500, "Repostería", true);
         Producto café = new Producto("Cafe", 1500, "Bebidas Calientes", true);
-        Producto téFrio = new Producto("Te Frío", 1000, "Bebidas Frías", true);
+        Producto téFrio = new Producto("Te frio", 1000, "Bebidas Frías", true);
 
         
         // Agregacion de los productos al menú
