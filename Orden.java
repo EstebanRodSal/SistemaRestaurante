@@ -196,22 +196,41 @@ public abstract class Orden implements Serializable{
     }
 
 
+/**
+ * Devuelve el estado de entrega de un producto.
+ *
+ * @return true si el producto ha sido entregado, false si no.
+ */
+public boolean isEntregado() {
+    return entregado;
+}
 
-    public boolean isEntregado() {
-        return entregado;
-    }
+/**
+ * Establece el estado de entrega de un producto.
+ *
+ * @param entregado true si el producto ha sido entregado, false si no.
+ */
+public void setEntregado(boolean entregado) {
+    this.entregado = entregado;
+}
 
-    public void setEntregado(boolean entregado) {
-        this.entregado = entregado;
-    }
+/**
+ * Obtiene el descuento aplicado a un producto en forma de byte.
+ *
+ * @return El valor del descuento como byte.
+ */
+public byte getDescuento() {
+    return descuento;
+}
 
-    public byte getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(byte descuento) {
-        this.descuento = descuento;
-    }
+/**
+ * Establece el descuento de un producto en forma de byte.
+ *
+ * @param descuento El valor del descuento como byte.
+ */
+public void setDescuento(byte descuento) {
+    this.descuento = descuento;
+}
 
     
 }

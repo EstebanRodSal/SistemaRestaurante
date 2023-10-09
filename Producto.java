@@ -145,10 +145,18 @@ public class Producto implements Serializable{
         this.menú = menú;
     }
 
+    /**
+     * Obtinene si el producto ya fue completado por el chef.
+     * @return true o false en caso de estar cocinado o no.
+     */
     public Boolean getCompletado() {
         return completado;
     }
 
+    /**
+     * Establece un producto como completado o no.
+     * @param completado estado del producto.
+     */
     public void setCompletado(Boolean completado) {
         this.completado = completado;
     }

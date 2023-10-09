@@ -6,11 +6,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class MainRestaurante {
 
@@ -21,28 +18,22 @@ public class MainRestaurante {
     final static String blue = "\u001B[34m";
     // Código de escape ANSI para color Verde Agua
     final static String cyan = "\u001B[36m";
+    private static int totalVentas;
 
-
-    /**
-     * Metodo encargado de limpiar la terimal
-     */
     public static void limpiarTerminal() {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (final Exception e) {
             // Manejo de excepciones
-            System.out.println(red + "Error al limpiar la terminal." + reset);
+            System.out.println("Error al limpiar la terminal.");
         }
     }
 
-    /**
-     * Metodo encargado de generar el reporte de ventas
-     */
     public static void GenerarReporte() {
         limpiarTerminal();
         // Verificar si es una orden para servicio a domicilio
         // Reporte: Total de ventas diarias
-        System.out.println(cyan + "Reporte de Total de Ventas Diarias:" + reset);
+        System.out.println(cyan + "Reporte de Total de Ventas Diarias:"+ reset);
         List<Orden> ventasDiarias = new ArrayList<>(registroPedidosTotal);
         Collections.sort(ventasDiarias, new Comparator<Orden>() {
             @Override
@@ -59,16 +50,16 @@ public class MainRestaurante {
             StringBuilder detallesVenta = new StringBuilder();
             for (Producto producto : comidaOrdenada) {
                 detallesVenta.append(producto.getNombre()).append(", ");
+                totalVentas = totalVentas + producto.getPrecio();
             }
             detallesVenta.delete(detallesVenta.length() - 2, detallesVenta.length()); // Eliminar la última coma y espacio
-            System.out.println(blue + "Orden: " + detallesVenta.toString() + " - Cantidad de Opciones Vendidas: " + comidaOrdenada.size() + reset);
+            System.out.println("Orden: " + detallesVenta.toString() + " - Cantidad de Opciones Vendidas: " + comidaOrdenada.size());
+            
         }
 
-        // Reporte: Reporte de servicio a domicilio
-        System.out.println(cyan + "\nReporte de Servicio a Domicilio:" + reset);
-        
-        //GENERAR AQUÍ REPORTE DE DE VETAS A DOMICILIO
-
+        System.out.println("El dinero total recolectado el día de hoy fue de: " + totalVentas);
+        return;
+       
         
     }
 
@@ -81,8 +72,13 @@ public class MainRestaurante {
 
 
     
-
+    /**
+     * Lista de todos los pedidos recibidos
+     */
     private static List<Orden> registroPedidosTotal = new ArrayList<Orden>(); //Esta lista contiene todos los pedidos totales
+    /**
+     * Lista de los pedidos express
+     */
     private static List<Orden> registroPedidosExpress = new ArrayList<Orden>(); //Esta lista contiene todos los pedidos express solamente
 
 
@@ -96,7 +92,7 @@ public class MainRestaurante {
         Producto tortaChilena = new Producto("Torta Chilena", 3500, "Repostería", true);
         Producto pastel = new Producto("Pastel", 2500, "Repostería", true);
         Producto café = new Producto("Cafe", 1500, "Bebidas Calientes", true);
-        Producto téFrio = new Producto("Te frio", 1000, "Bebidas Frías", true);
+        Producto téFrio = new Producto("Te Frío", 1000, "Bebidas Frías", true);
 
         
         // Agregacion de los productos al menú
@@ -119,35 +115,43 @@ public class MainRestaurante {
         // Apertura del servidor
         try {
             ServerSocket serverSocket = new ServerSocket(12345); // Puerto para la comunicación
-            System.out.println(cyan + "Esperando a clientes..."+ reset);
 
             while (true) {
+                Scanner scanner4 = new Scanner(System.in);
+                System.out.println(cyan+ "Sistema de Restaurante \n"+ reset);
+                System.out.print("Presione 's' para cerrar sistema o cualquier otra tecla para coninuar: ");
+                String userInput2 = scanner4.nextLine();
+    
+                if (userInput2.equalsIgnoreCase("s")) {
+                    break;  // Salir del bucle
+                }
+                System.out.println(cyan + "Esperando clientes..."+reset);
                 Socket socket = serverSocket.accept(); // Esperar a que un cliente se conecte
                 //Conexión con un cliente
                 ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
                 outputStream.writeObject(menú); // Envia el menú al cliente
-                System.out.println(cyan + "Un cliente se ha conectado al sistema" + reset);
+                System.out.println("Un cliente se ha conectado al sistema");
 
                 while (true){
                 
 
-                    ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
+                        ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
-                    System.out.println(blue + "ESPERANDO ORDEN"+ reset);
-                    // Recibe la elección del cliente (Comida)
-                    Orden elección = (Orden) inputStream.readObject();
+                        System.out.println(cyan + "ESPERANDO ORDEN"+ reset);
+                        // Recibe la elección del cliente (Comida)
+                        Orden elección = (Orden) inputStream.readObject();
 
-                    registroPedidosTotal.add(elección); //Agrega el pedido a la lista de pedidos para mantener un registro de todos
+                        registroPedidosTotal.add(elección); //Agrega el pedido a la lista de pedidos para mantener un registro de todos
 
 
                     
                         // Envía una confirmación al cliente de que se recibió su producto
-                        System.out.println("Orden recibida del cliente: " + elección.getComida());
+                        System.out.println(cyan + "Orden recibida del cliente: " + elección.getComida() +reset);
                         outputStream.writeObject("Orden recibida por el Restaurante con éxito: " + elección.getComida());
                         System.out.println(elección.getCliente().getNombre());
 
 
-                        System.out.println(cyan + "Asocie la orden recibida a algún empleado"+ reset);
+                        System.out.println("Asocie la orden recibida a algún empleado");
                         System.out.println("Digite 1 para Juan Daniel");
                         System.out.println("Digite 2 para Marta");
 
@@ -158,7 +162,7 @@ public class MainRestaurante {
 
                         while (!salida){
                             if (userInput == 1){//Juan Daniel
-                                System.out.println("Productos asociados al empleado Juan Daniel" );
+                                System.out.println(cyan + "Productos asociados al empleado Juan Daniel" + reset);
                                 for (Producto producto : elección.getComida()){
                                     
                                     empleado1.addOrdenes(producto);
@@ -166,7 +170,7 @@ public class MainRestaurante {
                                 }
 
                             }else if (userInput == 2){
-                                System.out.println("Productos asociados al empleado Marta" );
+                                System.out.println(cyan + "Productos asociados al empleado Marta" + reset );
                                 for (Producto producto : elección.getComida()){
                                     empleado2.addOrdenes(producto);
                                     salida = true;
@@ -174,9 +178,10 @@ public class MainRestaurante {
                                 }
 
                             }else{
-                                System.out.println("Empleado no encontrado");
+                                System.out.println(red + "Empleado no encontrado" +reset);
                             }
                         }
+
 
 
 
@@ -218,7 +223,7 @@ public class MainRestaurante {
                                 limpiarTerminal();
                                 todosCompletados = true;  
                                 
-                                System.out.println("Productos asociados al empleado:");
+                                System.out.println(cyan + "Productos asociados al empleado:" +reset);
                                 for (int i = 0; i < empleado2.getOrdenes().size(); i++) {
                                     Producto producto = empleado2.getOrdenes().get(i);
                                     System.out.println(i + 1 + ". " + producto.getNombre() + " - Completado: " + producto.getCompletado());
@@ -247,9 +252,17 @@ public class MainRestaurante {
                         }
                         
 
-                        
-
                        
+                       
+
+
+
+                    //--------Tener la posibilidad de ver un pedido, darle seguimiento y ver que empleado está haciendo eso------------------
+
+
+                    //---------Generar reporte
+
+
 
                     if (elección.getExpress()){//Si la orden es express se manda a mainExpress
                         // Enviar la orden recibida por sockets a MainExpress
@@ -262,12 +275,11 @@ public class MainRestaurante {
                             // Envia la orden a MainExpress
                             ObjectOutputStream expressOutputStream = new ObjectOutputStream(expressSocket.getOutputStream());
                             expressOutputStream.writeObject(elección);
-                            System.out.println("Orden enviada al repartidor");
-
-
+                            System.out.println( blue + "Orden enviada al repartidor" + reset);
+                            break;
                         } catch (IOException e) {
                             e.printStackTrace();
-                        } break;
+                        } ;
                     }else {
                         // Enviar la orden recibida por sockets a MainCliente
                         try {
@@ -277,7 +289,7 @@ public class MainRestaurante {
                             // Envia la orden a MainExpress
                             ObjectOutputStream expressOutputStream = new ObjectOutputStream(expressSocket.getOutputStream());
                             expressOutputStream.writeObject(elección);
-                            System.out.println("Orden entregada al cliente: " + elección.getCliente().getNombre());
+                            System.out.println(cyan + "Orden entregada al cliente: " + elección.getCliente().getNombre()+ reset);
                         }catch (IOException e) {
                             e.printStackTrace();
                         } break;
@@ -298,6 +310,26 @@ public class MainRestaurante {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        
+
+        try {
+            GenerarReporte();
+            ServerSocket serverSocket = new ServerSocket(124); // Puerto para la comunicación
+            System.out.println(red + "Esperando informe de repartidores..." + reset);
+            while (true) {
+                Socket socket = serverSocket.accept();
+                System.out.println("------------------------");
+                System.out.println(blue + "Informe recibido" + reset);
+                ObjectInputStream inputStream7 = new ObjectInputStream(socket.getInputStream());
+                Repartidor repartidor = (Repartidor) inputStream7.readObject();
+                ArrayList <Repartidor> repartidores = (ArrayList<Repartidor>) inputStream7.readObject();
+                repartidor.cantidadDeEntregasPorRepartidor(repartidores);
+                socket.close();
+                System.out.println("------------------------");
+                System.out.println("Saliendo del sistema...");
+                break;
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -206,7 +206,6 @@ public class MainCliente {
                             
                             System.out.println("¡Su orden de " + orden.getComida() + " ha sido entregada!");
                             System.out.println("-------------------------------------------");
-                            System.out.println("¡Gracias por utilizar nuestro sistema de pedidos! ¡Hasta pronto!");
                             //Se cierra el socket
                             socket.close();
                             break;
@@ -218,6 +217,7 @@ public class MainCliente {
                     System.out.println("¿Deseas realizar otro pedido? (Sí/No)");
                     String respuesta = scanner.nextLine();
                     if (respuesta.equalsIgnoreCase("No")) {
+                        System.out.println("¡Gracias por utilizar nuestro sistema de pedidos! ¡Hasta pronto!");
                         continuarPedido = false;
                     } else {
                         

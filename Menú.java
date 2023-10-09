@@ -56,16 +56,34 @@ public class Menú implements Serializable{
         return productos;
     }
 
+    /**
+     * Genera una representación en forma de cadena de un objeto de la clase.
+     * Este método sobrescribe el método toString estándar y devuelve una cadena
+     * que muestra el menú del restaurante en el formato "-> producto1, producto2, ...".
+     *
+     * @return Una cadena que representa el menú del restaurante.
+     */
     @Override
     public String toString() {
         System.out.println("-----Menú Restaurante-----");
         return String.format("-> %s", productos);
     }
 
+    /**
+     * Establece la lista de productos del restaurante.
+     *
+     * @param productos La lista de productos a establecer.
+     */
     public void setProductos(ArrayList<Producto> productos) {
         this.productos = productos;
     }
 
+    /**
+     * Busca un producto en la lista de productos del restaurante por su nombre.
+     *
+     * @param nombreProducto El nombre del producto que se desea buscar.
+     * @return El producto si se encuentra en la lista, o null si no se encuentra.
+     */
     public Producto getProducto(String nombreProducto) {
         for (Producto producto : productos) {
             if (producto.getNombre().equals(nombreProducto)) {
@@ -74,6 +92,7 @@ public class Menú implements Serializable{
         }
         return null; // Si no se encuentra el producto, devuelve null
     }
+
     
 
 

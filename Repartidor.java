@@ -1,8 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class Repartidor {
+/**
+ * Clase que representa un repartidor en un servicio de entrega.
+ */
+public class Repartidor implements Serializable {
 
     // Atributos de la clase Repartidor
 
@@ -24,8 +27,11 @@ public class Repartidor {
     /**
      * Lista de pedidos express que el repartidor debe entregar.
      */
-    private List<PedidosExpres> pedidosExpres = new ArrayList<PedidosExpres>();
+    private List<PedidosExpres> pedidosExpres = new ArrayList<>();
 
+    /**
+     * La cantidad de entregas realizadas por el repartidor.
+     */
     private int entregas;
 
     // Constructores
@@ -34,10 +40,12 @@ public class Repartidor {
      * Constructor de la clase `Repartidor`.
      * Crea una instancia de Repartidor con información sobre el nombre, placa del vehículo,
      * tipo de vehículo y una lista de pedidos express que debe entregar.
-     * @param nombre El nombre del repartidor.
-     * @param placa La placa del vehículo del repartidor.
-     * @param tipoVehiculo El tipo de vehículo que utiliza el repartidor.
+     *
+     * @param nombre        El nombre del repartidor.
+     * @param placa         La placa del vehículo del repartidor.
+     * @param tipoVehiculo  El tipo de vehículo que utiliza el repartidor.
      * @param pedidosExpres Lista de pedidos express que el repartidor debe entregar.
+     * @param entregas      La cantidad de entregas realizadas por el repartidor.
      */
     public Repartidor(String nombre, String placa, String tipoVehiculo, List<PedidosExpres> pedidosExpres, int entregas) {
         this.nombre = nombre;
@@ -51,6 +59,7 @@ public class Repartidor {
 
     /**
      * Obtiene el nombre del repartidor.
+     *
      * @return El nombre del repartidor.
      */
     public String getNombre() {
@@ -59,6 +68,7 @@ public class Repartidor {
 
     /**
      * Establece el nombre del repartidor.
+     *
      * @param nombre El nombre del repartidor.
      */
     public void setNombre(String nombre) {
@@ -67,6 +77,7 @@ public class Repartidor {
 
     /**
      * Obtiene la placa del vehículo del repartidor.
+     *
      * @return La placa del vehículo del repartidor.
      */
     public String getPlaca() {
@@ -75,6 +86,7 @@ public class Repartidor {
 
     /**
      * Establece la placa del vehículo del repartidor.
+     *
      * @param placa La placa del vehículo del repartidor.
      */
     public void setPlaca(String placa) {
@@ -83,6 +95,7 @@ public class Repartidor {
 
     /**
      * Obtiene el tipo de vehículo que utiliza el repartidor.
+     *
      * @return El tipo de vehículo del repartidor.
      */
     public String getTipoVehiculo() {
@@ -91,6 +104,7 @@ public class Repartidor {
 
     /**
      * Establece el tipo de vehículo que utiliza el repartidor.
+     *
      * @param tipoVehiculo El tipo de vehículo del repartidor.
      */
     public void setTipoVehiculo(String tipoVehiculo) {
@@ -99,6 +113,7 @@ public class Repartidor {
 
     /**
      * Obtiene la lista de pedidos express que el repartidor debe entregar.
+     *
      * @return Lista de pedidos express que el repartidor debe entregar.
      */
     public List<PedidosExpres> getPedidosExpres() {
@@ -107,10 +122,29 @@ public class Repartidor {
 
     /**
      * Establece la lista de pedidos express que el repartidor debe entregar.
+     *
      * @param pedidosExpres Lista de pedidos express que el repartidor debe entregar.
      */
     public void setPedidosExpres(List<PedidosExpres> pedidosExpres) {
         this.pedidosExpres = pedidosExpres;
+    }
+
+    /**
+     * Obtiene la cantidad de entregas realizadas por el repartidor.
+     *
+     * @return La cantidad de entregas realizadas por el repartidor.
+     */
+    public int getEntregas() {
+        return entregas;
+    }
+
+    /**
+     * Establece la cantidad de entregas realizadas por el repartidor.
+     *
+     * @param entregas La cantidad de entregas realizadas por el repartidor.
+     */
+    public void setEntregas(int entregas) {
+        this.entregas = entregas;
     }
 
     // Métodos específicos de la clase Repartidor
@@ -124,14 +158,11 @@ public class Repartidor {
         this.entregas += 1;
     }
 
-    public int getEntregas() {
-        return entregas;
-    }
-
-    public void setEntregas(int entregas) {
-        this.entregas = entregas;
-    }
-
+    /**
+     * Método que muestra la cantidad de entregas realizadas por cada repartidor.
+     *
+     * @param repartidores Lista de repartidores para mostrar la cantidad de entregas.
+     */
     public void cantidadDeEntregasPorRepartidor(ArrayList<Repartidor> repartidores) {
         System.out.println("Lista de entregas por cada repartidor \n");
         ArrayList<Repartidor> listaAux = new ArrayList<>();
@@ -154,9 +185,9 @@ public class Repartidor {
             }
         }
 
-        // Imprimir los nombres de los repartidores en listaAux
+        // Imprimir los nombres de los repartidores en listaAux y sus entregas
         for (Repartidor repartidor : listaAux) {
-            System.out.println(repartidor.getNombre()+" - Entregas: "+repartidor.getEntregas());
+            System.out.println(repartidor.getNombre() + " - Entregas: " + repartidor.getEntregas());
         }
     }
 }
